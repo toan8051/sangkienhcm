@@ -17,8 +17,7 @@ from environs import Env # new
 env = Env() # new
 env.read_env() # new
 SECRET_KEY = env("DJANGO_SECRET_KEY")
-DEBUG = env.bool("DJANGO_DEBUG") # new
-
+DEBUG = env.bool("DJANGO_DEBUG", default=False) # new
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -29,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 #SECRET_KEY = 'django-insecure-a5kmm+kt^$m)^i#z-*d5v+e2#mds9uq32rf%9ns)vq#137imu2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+#DEBUG = True
 
 #ALLOWED_HOSTS = []
 ALLOWED_HOSTS = ["*.herokuapp.com", "localhost", "127.0.0.1"] # new
@@ -184,3 +183,11 @@ ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False # new
 # ACCOUNT_AUTHENTICATION_METHOD = "email" # new
 # ACCOUNT_EMAIL_REQUIRED = True # new
 # ACCOUNT_UNIQUE_EMAIL = True # new
+
+SECURE_SSL_REDIRECT = env.bool("DJANGO_SECURE_SSL_REDIRECT", default=True)
+SECURE_HSTS_SECONDS = env.int("DJANGO_SECURE_HSTS_SECONDS", default=2592000) # 30 days
+SECURE_HSTS_INCLUDE_SUBDOMAINS = env.bool("DJANGO_SECURE_HSTS_INCLUDE_SUBDOMAINS", default=True)
+SECURE_HSTS_PRELOAD = env.bool("DJANGO_SECURE_HSTS_PRELOAD", default=True)
+
+SESSION_COOKIE_SECURE = env.bool("DJANGO_SESSION_COOKIE_SECURE", default=True)
+CSRF_COOKIE_SECURE = env.bool("DJANGO_CSRF_COOKIE_SECURE", default=True)

@@ -10,14 +10,18 @@
       <div class="col col-lg-9 col-xl-7">
         <div class="card rounded-3">
           <div class="card-body p-4">
-
             <h4 class="text-center my-3 pb-3">Đơn Vị Trực Thuộc Viễn Thông TP.HCM</h4>
             <table class="table mb-4">
             {% if user.is_authenticated %}
               {% if donvivttp %}
               <div class="list-group">
                 {% for donvi in donvivttp %}
-                  <a href="{% url 'sangkienlist' donvi.id %}" class="list-group-item list-group-item-action">{{ donvi.name }}</a>
+                  {% if request.user.username.title|lower == donvi.nguoidungthuocdonvi|lower %}
+                    <p>{{ . }}</p>
+                    <a href="{% url 'sangkienlist' donvi.id %}" class="list-group-item list-group-item-action">{{ donvi.name }}</a>
+                  {% else %}
+                    <a href="#" class="list-group-item list-group-item-action">{{ donvi.name }}</a>
+                  {% endif %}
                 {% endfor %}
               </div>
               {% else %}
