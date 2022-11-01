@@ -1,0 +1,78 @@
+{% extends "_base.html" %}
+<!-- {% load static %} -->
+
+{% block title %}Danh mục sáng kiến{% endblock title %}
+
+{% block content %}
+
+<div>
+    <div>
+        
+        <section class="vh-50" style="background-color: #eee;">
+            <div class="container py-5 h-50">
+              <div class="row d-flex justify-content-center align-items-center h-50">
+                <div class="col col-lg-9 col-xl-7">
+                  <div class="card rounded-3">
+                    <div class="card-body p-4">
+                    {% for sangkien in object_list %}    
+                      <h4 class="text-center my-3 pb-3">Danh sách sáng kiến của {{ donvivttp.name | upper }} </h4>
+          
+                        <div class="col-12">
+                          <input
+                            class="btn btn-primary"
+                            value="Thêm sáng kiến"
+                            type="button"
+                            onclick=location.href='{% url "sangkien-add" donvivttp.id %}' />
+                        </div>
+          
+       
+                      <table class="table mb-4">
+                        <thead>
+                          <tr>
+                            <th scope="col">STT</th>
+                            <th scope="col">Tên Sáng Kiến</th>
+                            <th scope="col">Xếp Loại</th>
+                            <th scope="col">Download</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <th scope="row">1</th>
+                            <td><a href='{% url "sangkien-update" donvivttp.id sangkien.id %}'>{{ sangkien.idea_name }} </a></td>
+                            <td>Chưa xét</td>
+                            <td>
+                                {% if sangkien.upload_file %}
+                                <div class="">
+                                    <a role="button" 
+                                        href="{{ sangkien.upload_file.url }}"
+                                        download="{{ sangkien.upload_file.url }}"
+                                        class="btn btn-dark float-right ml-0">
+                                        Download
+                                    </a>
+                                </div>
+                                {% endif %}
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table> 
+                      {% empty %}
+                      <p>{{ donvivttp.name }} chưa có sáng kiến nào.</p>
+                      <div class="col-12">
+                          <input
+                          class="btn btn-primary"
+                          value="Thêm sáng kiến"
+                          type="button"
+                          onclick=location.href='{% url "sangkien-add" donvivttp.id %}' />
+                      </div>
+                      {% endfor %}
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+{% endblock content %}  

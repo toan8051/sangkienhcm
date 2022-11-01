@@ -1,0 +1,38 @@
+{% extends "_base.html" %}
+<!-- {% load static %} -->
+
+{% block title %}Đơn Vị Trực Thuộc Viễn Thông TP.HCM{% endblock title %}
+
+{% block content %}
+<section class="vh-50" style="background-color: #eee;">
+  <div class="container py-5 h-50">
+    <div class="row d-flex justify-content-center align-items-center h-50">
+      <div class="col col-lg-9 col-xl-7">
+        <div class="card rounded-3">
+          <div class="card-body p-4">
+
+            <h4 class="text-center my-3 pb-3">Đơn Vị Trực Thuộc Viễn Thông TP.HCM</h4>
+            <table class="table mb-4">
+            {% if user.is_authenticated %}
+              {% if donvivttp %}
+              <div class="list-group">
+                {% for donvi in donvivttp %}
+                  <a href="{% url 'sangkienlist' donvi.id %}" class="list-group-item list-group-item-action">{{ donvi.name }}</a>
+                {% endfor %}
+              </div>
+              {% else %}
+                <p>Chưa dữ liệu.</p>
+              {% endif %}
+            {% else %}
+              <h2>Chương trình quản lý sáng kiến, đăng ký, xét duyệt và khen thưởng</h2>
+              <p>Bạn phải đăng nhập (Log in) để sử dụng</p>
+              <a href="{% url 'account_login' %}">Log In</a>
+            {% endif %}
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}  

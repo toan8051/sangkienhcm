@@ -1,0 +1,24 @@
+{% extends "_base.html" %}
+<!-- {% load static %} -->
+
+{% block title %}Delete sáng kiến{% endblock title %}
+
+{% block content %}
+
+<p>Bạn có chắc muốn Delete sáng kiến : <b>{{ object.idea_name }}</b>
+   của đơn vị <i>{{ donvivttp.name }}</i>?</p>
+ 
+ <form method="POST">
+     {% csrf_token %}
+     <input
+        class="btn btn-danger"
+        value="Vâng, hãy xóa đi"
+        type="submit">
+     <input
+        class="btn btn-dark"
+        value="Không muốn xóa nữa"
+        type="button"
+        onclick=location.href='{% url "sangkienlist" donvivttp.id %}';>
+ </form>
+
+{% endblock content %}  
