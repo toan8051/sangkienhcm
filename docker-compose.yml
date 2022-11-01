@@ -9,6 +9,9 @@ services:
       - .:/code
     depends_on:
       - db
+    environment:
+      - "DJANGO_SECRET_KEY=YIxeF-ed9RWiRDMNxdBti7QEaMrOv1FbJnaegPWnlV3h7TKGjgs"
+      - "DJANGO_DEBUG=True"
   db:
     image: postgres:13
     volumes:
